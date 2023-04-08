@@ -1,14 +1,7 @@
-import os
-from dotenv import load_dotenv
 import requests
 import json
 
-def list_books(environment, query_name):
-    load_dotenv(f"config/{ environment }.env")
-
-    api_url = os.getenv('API_URL')
-    api_id = os.getenv('API_ID')
-
+def list_books(api_url, api_id, query_name):
     headers = {
         "Content-Type": "application/json",
         "x-api-key": api_id
@@ -35,4 +28,4 @@ def list_books(environment, query_name):
         json = { "query": query }
     )
     
-    return response.json()
+    return json.dumps(response.json(), indent = 4)
